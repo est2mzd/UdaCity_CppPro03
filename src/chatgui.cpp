@@ -6,6 +6,10 @@
 #include "chatlogic.h"
 #include "chatgui.h"
 
+// debug
+#include <iostream>
+using std::cout; using std::endl;
+
 // size of chatbot window
 const int width = 414;
 const int height = 736;
@@ -52,6 +56,8 @@ ChatBotFrame::ChatBotFrame(const wxString &title) : wxFrame(NULL, wxID_ANY, titl
 
 void ChatBotFrame::OnEnter(wxCommandEvent &WXUNUSED(event))
 {
+    cout << "<Debug> ChatBotFrame::OnEnter" << endl;
+
     // retrieve text from text control
     wxString userText = _userTextCtrl->GetLineText(0);
 
@@ -118,7 +124,8 @@ ChatBotPanelDialog::ChatBotPanelDialog(wxWindow *parent, wxWindowID id)
     ////
 
     // create chat logic instance
-    _chatLogic = new ChatLogic(); 
+    //_chatLogic = new ChatLogic(); 
+    _chatLogic = std::make_unique<ChatLogic>();
 
     // pass pointer to chatbot dialog so answers can be displayed in GUI
     _chatLogic->SetPanelDialogHandle(this);
@@ -135,7 +142,7 @@ ChatBotPanelDialog::~ChatBotPanelDialog()
     //// STUDENT CODE
     ////
 
-    delete _chatLogic;
+    // delete _chatLogic; // unique_ptr does not need "delete" command.
 
     ////
     //// EOF STUDENT CODE
