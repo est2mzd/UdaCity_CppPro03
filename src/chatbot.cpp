@@ -45,6 +45,72 @@ ChatBot::~ChatBot()
 //// STUDENT CODE
 ////
 
+// Rule of Five : 2 (assignment operator)
+ChatBot& ChatBot::operator=(const ChatBot &source)
+{
+    std::cout << "ChatBot Assignment Operator" << std::endl;
+    if(this==&source){
+        return *this;
+    }
+    //
+    _image = source._image;
+    _currentNode = source._currentNode;
+    _chatLogic = source._chatLogic;
+    _rootNode = source._rootNode;
+    return *this;    
+}
+
+
+// Rule of Five : 3 (copy contructor)
+ChatBot::ChatBot(const ChatBot &source)
+{
+    std::cout << "ChatBot Copy Constructor" << std::endl;
+    // deep copy data handles
+    _image = source._image;
+    _currentNode = source._currentNode;
+    _chatLogic = source._chatLogic;
+    _rootNode = source._rootNode;
+}
+
+
+// Rule of Five : 4 (move contructor)
+ChatBot::ChatBot(ChatBot &&source)
+{
+    std::cout << "ChatBot Move Constructor" << std::endl;
+    // copy data handles
+    _image = source._image;
+    _currentNode = source._currentNode;
+    _chatLogic = source._chatLogic;
+    _rootNode = source._rootNode;
+
+    // invalidate data handles
+    source._image = nullptr;
+    source._currentNode = nullptr;
+    source._chatLogic = nullptr;
+    source._rootNode = nullptr;
+}
+
+// Rule of Five : 5 (move assignment operator)
+ChatBot& ChatBot::operator=(ChatBot && source)
+{
+    std::cout << "ChatBot Move Assignment Operator" << std::endl;
+    if(this==&source){
+        return *this;
+    }
+    // copy data handles
+    _image = source._image;
+    _currentNode = source._currentNode;
+    _chatLogic = source._chatLogic;
+    _rootNode = source._rootNode;
+
+    // invalidate data handles
+    source._image = nullptr;
+    source._currentNode = nullptr;
+    source._chatLogic = nullptr;
+    source._rootNode = nullptr;
+    return *this;
+}
+
 ////
 //// EOF STUDENT CODE
 
