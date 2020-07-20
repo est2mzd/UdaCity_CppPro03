@@ -45,18 +45,25 @@ ChatBot::~ChatBot()
 //// STUDENT CODE
 ////
 
+
 // Rule of Five : 2 (assignment operator)
 ChatBot& ChatBot::operator=(const ChatBot &source)
 {
     std::cout << "ChatBot Assignment Operator" << std::endl;
-    if(this==&source){
-        return *this;
-    }
-    //
-    _image = source._image;
-    _currentNode = source._currentNode;
-    _chatLogic = source._chatLogic;
-    _rootNode = source._rootNode;
+
+    if(this==&source){ return *this; }    // protect against self-assignment
+
+    // data handles (owned) --> deep copy
+    if(_image != NULL){delete _image;} // check the value of _image
+    _image = new wxBitmap();
+    *_image = *source._image; // deep copy
+
+    // data handles (not owned) --> shallow copy
+    _currentNode = source._currentNode; // shallow copy
+    _rootNode = source._rootNode;       // shallow copy
+    _chatLogic = source._chatLogic;     // shallow copy
+    //_chatLogic->SetChatbotHandle(this); // shallow copy, Is it better to use setter ?
+
     return *this;    
 }
 
@@ -65,11 +72,16 @@ ChatBot& ChatBot::operator=(const ChatBot &source)
 ChatBot::ChatBot(const ChatBot &source)
 {
     std::cout << "ChatBot Copy Constructor" << std::endl;
-    // deep copy data handles
-    _image = source._image;
-    _currentNode = source._currentNode;
-    _chatLogic = source._chatLogic;
-    _rootNode = source._rootNode;
+
+    // data handles (owned) --> deep copy
+    if(_image != NULL){delete _image;} // check the value of _image
+    _image = new wxBitmap();
+    *_image = *source._image; // deep copy
+
+    // data handles (not owned) --> shallow copy
+    _currentNode = source._currentNode; // shallow copy
+    _rootNode = source._rootNode;       // shallow copy
+    _chatLogic = source._chatLogic;     // shallow copy
 }
 
 
@@ -77,6 +89,7 @@ ChatBot::ChatBot(const ChatBot &source)
 ChatBot::ChatBot(ChatBot &&source)
 {
     std::cout << "ChatBot Move Constructor" << std::endl;
+
     // copy data handles
     _image = source._image;
     _currentNode = source._currentNode;

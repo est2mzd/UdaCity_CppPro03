@@ -31,6 +31,7 @@ public:
 
     //// STUDENT CODE
     ////
+
     // Rule of Five : 2 (assignment operator)
     // The default assignment operation performs a shallow copy.
     // If a deep copy is needed, it has be implemented by the programmer.
@@ -50,7 +51,6 @@ public:
     // With this operator, ownership of a resource can be transferred from one object to another.
     // The internal behavior is very similar to the move constructor.
     ChatBot &operator=(ChatBot && source);
-
 
     ////
     //// EOF STUDENT CODE
