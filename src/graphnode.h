@@ -5,6 +5,9 @@
 #include <string>
 #include "chatbot.h"
 
+#include <memory>
+using std::vector;
+using std::unique_ptr;
 
 // forward declarations
 class GraphEdge;
@@ -16,10 +19,13 @@ private:
     ////
 
     // data handles (owned)
-    std::vector<GraphEdge *> _childEdges;  // edges to subsequent nodes
+    //std::vector<GraphEdge *> _childEdges;  // edges to subsequent nodes
+    vector<unique_ptr<GraphEdge>> _childEdges; // my code
 
     // data handles (not owned)
     std::vector<GraphEdge *> _parentEdges; // edges to preceding nodes 
+    //vector<unique_ptr<GraphEdge>> _parentEdges; // my code
+
     ChatBot *_chatBot;
 
     ////
