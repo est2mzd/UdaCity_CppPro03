@@ -42,7 +42,7 @@ ChatBot::~ChatBot()
     }
 }
 
-//// STUDENT CODE
+//// STUDENT CODE : Task 2
 ////
 
 
@@ -54,8 +54,6 @@ ChatBot& ChatBot::operator=(const ChatBot &source)
     if(this==&source){ return *this; }    // protect against self-assignment
 
     // data handles (owned) --> deep copy
-    if(_image != NULL){delete _image;} // check the value of _image
-    _image = new wxBitmap();
     *_image = *source._image; // deep copy
 
     // data handles (not owned) --> shallow copy
@@ -74,8 +72,6 @@ ChatBot::ChatBot(const ChatBot &source)
     std::cout << "ChatBot Copy Constructor" << std::endl;
 
     // data handles (owned) --> deep copy
-    if(_image != NULL){delete _image;} // check the value of _image
-    _image = new wxBitmap();
     *_image = *source._image; // deep copy
 
     // data handles (not owned) --> shallow copy
@@ -125,7 +121,7 @@ ChatBot& ChatBot::operator=(ChatBot && source)
 }
 
 ////
-//// EOF STUDENT CODE
+//// EOF STUDENT CODE : Task 2
 
 void ChatBot::ReceiveMessageFromUser(std::string message)
 {
