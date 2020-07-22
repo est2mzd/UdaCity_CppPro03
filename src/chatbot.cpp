@@ -59,8 +59,8 @@ ChatBot& ChatBot::operator=(const ChatBot &source)
     // data handles (not owned) --> shallow copy
     _currentNode = source._currentNode; // shallow copy
     _rootNode = source._rootNode;       // shallow copy
-    _chatLogic = source._chatLogic;     // shallow copy
-    //_chatLogic->SetChatbotHandle(this); // shallow copy, Is it better to use setter ?
+    //_chatLogic = source._chatLogic;   // shallow copy
+    _chatLogic->SetChatbotHandle(this); // shallow copy, 
 
     return *this;    
 }
@@ -77,7 +77,8 @@ ChatBot::ChatBot(const ChatBot &source)
     // data handles (not owned) --> shallow copy
     _currentNode = source._currentNode; // shallow copy
     _rootNode = source._rootNode;       // shallow copy
-    _chatLogic = source._chatLogic;     // shallow copy
+  //_chatLogic = source._chatLogic;     // shallow copy
+    _chatLogic->SetChatbotHandle(this); // shallow copy, 
 }
 
 
@@ -89,8 +90,10 @@ ChatBot::ChatBot(ChatBot &&source)
     // copy data handles
     _image = source._image;
     _currentNode = source._currentNode;
-    _chatLogic = source._chatLogic;
     _rootNode = source._rootNode;
+  //_chatLogic = source._chatLogic;
+    _chatLogic->SetChatbotHandle(this); // shallow copy, 
+    
 
     // invalidate data handles
     source._image = nullptr;
@@ -109,8 +112,10 @@ ChatBot& ChatBot::operator=(ChatBot && source)
     // copy data handles
     _image = source._image;
     _currentNode = source._currentNode;
-    _chatLogic = source._chatLogic;
     _rootNode = source._rootNode;
+  //_chatLogic = source._chatLogic;
+    _chatLogic->SetChatbotHandle(this); // shallow copy, 
+    
 
     // invalidate data handles
     source._image = nullptr;
