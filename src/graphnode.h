@@ -15,7 +15,7 @@ class GraphEdge;
 class GraphNode
 {
 private:
-    //// STUDENT CODE : Task 4
+    //// STUDENT CODE : Task 4, Task 5
     ////
 
     // data handles (owned) ==> modify to unique_ptr
@@ -25,7 +25,8 @@ private:
     // data handles (not owned)
     vector<GraphEdge *> _parentEdges; // edges to preceding nodes 
 
-    ChatBot *_chatBot;
+    ChatBot *_chatBot; // original, Task 5
+  //ChatBot  _chatBot; // my code, _chatBot is saved in stack memory.
 
     ////
     //// EOF STUDENT CODE
