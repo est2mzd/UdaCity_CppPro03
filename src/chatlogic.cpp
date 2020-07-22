@@ -13,6 +13,8 @@
 
 #include <memory>
 using std::unique_ptr;
+using std::make_unique;
+using std::move;
 
 ChatLogic::ChatLogic()
 {
@@ -37,17 +39,19 @@ ChatLogic::~ChatLogic()
     // delete chatbot instance
     delete _chatBot;
 
+    // For Task 3
     // delete all nodes : if _nodes is unique_ptr, this "delete" are not needed. koba
     // for (auto it = std::begin(_nodes); it != std::end(_nodes); ++it)
     // {
     //     delete *it;
     // }
 
+    // For Task 4
     // delete all edges
-    for (auto it = std::begin(_edges); it != std::end(_edges); ++it)
-    {
-        delete *it;
-    }
+    // for (auto it = std::begin(_edges); it != std::end(_edges); ++it)
+    // {
+    //     delete *it;
+    // }
 
     ////
     //// EOF STUDENT CODE : Task 3
@@ -166,21 +170,28 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
                             auto childNode  = std::find_if(_nodes.begin(), _nodes.end(), [&childToken]( unique_ptr<GraphNode> &node) { return node->GetID() == std::stoi(childToken->second); });
 
                             // create new edge
-                            GraphEdge *edge = new GraphEdge(id);
-                 
-                          //edge->SetChildNode(*childNode);           // oroginal
-                            edge->SetParentNode( parentNode->get() ); // my code
+                          //GraphEdge *edge = new GraphEdge(id); // original
+                            unique_ptr<GraphEdge> edge = make_unique<GraphEdge>(id);
 
-                            edge->SetChildNode(  childNode->get()  );                            
-                            _edges.push_back(edge);
+                          //edge->SetParentNode(*parentNode);       // original
+                            edge->SetParentNode(parentNode->get()); // my code
+
+                          //edge->SetChildNode(*childNode);       // oroginal
+                            edge->SetChildNode(childNode->get()); // my code
+
+                          //_edges.push_back(edge); // original
+                          //_edges.push_back(edge); // my code
 
 
                             // find all keywords for current node
                             AddAllTokensToElement("KEYWORD", tokens, *edge);
 
                             // store reference in child node and parent node
-                            (*childNode)->AddEdgeToParentNode(edge);
-                            (*parentNode)->AddEdgeToChildNode(edge);
+                          //(*childNode)->AddEdgeToParentNode(edge); // original
+                            (*childNode)->AddEdgeToParentNode(edge.get());
+
+                          //(*parentNode)->AddEdgeToChildNode(edge);       // original
+                            (*parentNode)->AddEdgeToChildNode(move(edge)); // want to pass unique_ptr
                         }
 
                         ////
@@ -213,11 +224,10 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
         // search for nodes which have no incoming edges
         if ((*it)->GetNumberOfParents() == 0)
         {
-
             if (rootNode == nullptr)
             {
-                // rootNode = *it; // assign current node to root
-                rootNode = it->get(); // assign current node to root
+             // rootNode = *it;       // assign current node to root : original
+                rootNode = it->get(); // assign current node to root : my code
             }
             else
             {

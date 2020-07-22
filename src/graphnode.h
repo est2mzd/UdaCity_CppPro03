@@ -15,16 +15,15 @@ class GraphEdge;
 class GraphNode
 {
 private:
-    //// STUDENT CODE
+    //// STUDENT CODE : Task 4
     ////
 
-    // data handles (owned)
-    std::vector<GraphEdge *> _childEdges;  // edges to subsequent nodes
-    //vector<unique_ptr<GraphEdge>> _childEdges; // my code
+    // data handles (owned) ==> modify to unique_ptr
+  //vector<GraphEdge *> _childEdges;  // edges to subsequent nodes
+    vector<unique_ptr<GraphEdge>> _childEdges; // my code
 
     // data handles (not owned)
-    std::vector<GraphEdge *> _parentEdges; // edges to preceding nodes 
-    //vector<unique_ptr<GraphEdge>> _parentEdges; // my code
+    vector<GraphEdge *> _parentEdges; // edges to preceding nodes 
 
     ChatBot *_chatBot;
 
@@ -33,7 +32,7 @@ private:
 
     // proprietary members
     int _id;
-    std::vector<std::string> _answers;
+    vector<std::string> _answers;
 
 public:
     // constructor / destructor
@@ -50,7 +49,8 @@ public:
     // proprietary functions
     void AddToken(std::string token); // add answers to list
     void AddEdgeToParentNode(GraphEdge *edge);
-    void AddEdgeToChildNode(GraphEdge *edge);
+  //void AddEdgeToChildNode(GraphEdge *edge);             // original
+    void AddEdgeToChildNode(unique_ptr<GraphEdge> edge);  // my code : Task 4
 
     //// STUDENT CODE
     ////
