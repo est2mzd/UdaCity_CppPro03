@@ -30,6 +30,24 @@ wx/bitmap.h
 string
 -
 
+/home/takuya/work/UdaCity_CppPro03/src/chatgui.cpp
+wx/filename.h
+-
+wx/colour.h
+-
+wx/image.h
+-
+string
+-
+chatbot.h
+/home/takuya/work/UdaCity_CppPro03/src/chatbot.h
+chatlogic.h
+/home/takuya/work/UdaCity_CppPro03/src/chatlogic.h
+chatgui.h
+/home/takuya/work/UdaCity_CppPro03/src/chatgui.h
+iostream
+-
+
 /home/takuya/work/UdaCity_CppPro03/src/chatgui.h
 wx/wx.h
 -
@@ -72,23 +90,11 @@ chatgui.h
 memory
 -
 
-/home/takuya/work/UdaCity_CppPro03/src/graphedge.cpp
-graphnode.h
-/home/takuya/work/UdaCity_CppPro03/src/graphnode.h
-graphedge.h
-/home/takuya/work/UdaCity_CppPro03/src/graphedge.h
-
 /home/takuya/work/UdaCity_CppPro03/src/graphedge.h
 vector
 -
 string
 -
-
-/home/takuya/work/UdaCity_CppPro03/src/graphnode.cpp
-graphedge.h
-/home/takuya/work/UdaCity_CppPro03/src/graphedge.h
-graphnode.h
-/home/takuya/work/UdaCity_CppPro03/src/graphnode.h
 
 /home/takuya/work/UdaCity_CppPro03/src/graphnode.h
 vector

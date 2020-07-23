@@ -18,14 +18,14 @@ using std::move;
 
 ChatLogic::ChatLogic()
 {
-    //// STUDENT CODE
+    //// STUDENT CODE : Task 5 , ChatLogic does not have ChatBot instances
     ////
 
     // create instance of chatbot
-    _chatBot = new ChatBot("../images/chatbot.png");
+    // _chatBot = new ChatBot("../images/chatbot.png");
 
     // add pointer to chatlogic so that chatbot answers can be passed on to the GUI
-    _chatBot->SetChatLogicHandle(this);
+    // _chatBot->SetChatLogicHandle(this);
   
 
     ////
@@ -38,7 +38,7 @@ ChatLogic::~ChatLogic()
     ////
 
     // delete chatbot instance
-    delete _chatBot;
+    // delete _chatBot; //  : Task 5 , ChatLogic does not have ChatBot instances
 
     // For Task 3
     // delete all nodes : if _nodes is unique_ptr, this "delete" are not needed. koba
@@ -237,9 +237,23 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
         }
     }
 
+    // Task 5
     // add chatbot to graph root node
-    _chatBot->SetRootNode(rootNode);
-    rootNode->MoveChatbotHere(_chatBot);
+    //_chatBot->SetRootNode(rootNode);      // original
+    //rootNode->MoveChatbotHere(_chatBot);  // original
+
+    // Task 5 : create instance of chatbot on the stack memory.
+    ChatBot* localChatBot = new ChatBot("../images/chatbot.png");
+    localChatBot->SetChatLogicHandle(this);
+
+    // Task 5 : add chatbot to graph root node
+    localChatBot->SetRootNode(rootNode);
+    rootNode->MoveChatbotHere(std::move(localChatBot));
+
+    // add pointer to chatlogic so that chatbot answers can be passed on to the GUI
+    // _chatBot->SetChatLogicHandle(this);
+
+
     
     ////
     //// EOF STUDENT CODE
