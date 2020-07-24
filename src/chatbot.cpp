@@ -57,12 +57,13 @@ ChatBot& ChatBot::operator=(const ChatBot &source)
     if(this==&source){ return *this; }    // protect against self-assignment
 
     // data handles (owned) --> deep copy
+    // this->_image = new wxBitmap();
     *_image = *source._image; // deep copy
 
     // data handles (not owned) --> shallow copy
     _currentNode = source._currentNode; // shallow copy
     _rootNode = source._rootNode;       // shallow copy
-    //_chatLogic = source._chatLogic;   // shallow copy
+    _chatLogic = source._chatLogic;   // shallow copy
     _chatLogic->SetChatbotHandle(this); // shallow copy, 
 
     return *this;    
@@ -80,7 +81,7 @@ ChatBot::ChatBot(const ChatBot &source)
     // data handles (not owned) --> shallow copy
     _currentNode = source._currentNode; // shallow copy
     _rootNode = source._rootNode;       // shallow copy
-  //_chatLogic = source._chatLogic;     // shallow copy
+    _chatLogic = source._chatLogic;     // shallow copy
     _chatLogic->SetChatbotHandle(this); // shallow copy, 
 }
 
@@ -94,7 +95,7 @@ ChatBot::ChatBot(ChatBot &&source)
     _image = source._image;
     _currentNode = source._currentNode;
     _rootNode = source._rootNode;
-  //_chatLogic = source._chatLogic;
+    _chatLogic = source._chatLogic;
     _chatLogic->SetChatbotHandle(this); // shallow copy, 
     
 
@@ -116,7 +117,7 @@ ChatBot& ChatBot::operator=(ChatBot && source)
     _image = source._image;
     _currentNode = source._currentNode;
     _rootNode = source._rootNode;
-  //_chatLogic = source._chatLogic;
+    _chatLogic = source._chatLogic;
     _chatLogic->SetChatbotHandle(this); // shallow copy, 
     
 

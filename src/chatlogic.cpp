@@ -142,6 +142,7 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
                         {
                           //_nodes.emplace_back(new GraphNode(id)); // original
                             _nodes.emplace_back(std::make_unique<GraphNode>(id));
+                          //_nodes.emplace_back( unique_ptr<GraphNode>(new GraphNode(id)) );
                             newNode = _nodes.end() - 1; // get iterator to last element
 
                             // add all answers to current node
@@ -175,10 +176,10 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
                             unique_ptr<GraphEdge> edge = make_unique<GraphEdge>(id);
 
                           //edge->SetParentNode(*parentNode);       // original
-                            edge->SetParentNode(parentNode->get()); // my code
-
                           //edge->SetChildNode(*childNode);       // oroginal
-                            edge->SetChildNode(childNode->get()); // my code
+                            edge->SetParentNode((*parentNode).get()); // my code
+                            edge->SetChildNode((*childNode).get()); // my code
+
 
                           //_edges.push_back(edge); // original
                           //_edges.push_back(edge); // my code

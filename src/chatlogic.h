@@ -26,7 +26,7 @@ private:
   //vector<GraphNode *> _nodes;           // original
     vector<unique_ptr<GraphNode>> _nodes; // my code
 
-    vector<GraphEdge *> _edges;
+    //vector<GraphEdge *> _edges;
 
     ////
     //// EOF STUDENT CODE : Task 3
