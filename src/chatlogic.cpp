@@ -135,7 +135,8 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
 
                         // check if node with this ID exists already
                       //auto newNode = std::find_if(_nodes.begin(), _nodes.end(), [&id](GraphNode *node) { return node->GetID() == id; }); // original
-                        auto newNode = std::find_if(_nodes.begin(), _nodes.end(), [&id](unique_ptr<GraphNode> &node) { return node->GetID() == id; });
+                        auto newNode = std::find_if(_nodes.begin(), _nodes.end(), [&id](unique_ptr<GraphNode> &node) { return node->GetID() == id; }); // my code-1
+                      //auto newNode = std::find_if(_nodes.begin(), _nodes.end(), [&id](unique_ptr<GraphNode> &node) { return node.get()->GetID() == id; }); // my code-2
 
                         // create new element if ID does not yet exist
                         if (newNode == _nodes.end())
@@ -243,12 +244,12 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
     //rootNode->MoveChatbotHere(_chatBot);  // original
 
     // Task 5 : create instance of chatbot on the stack memory.
-    ChatBot* localChatBot = new ChatBot("../images/chatbot.png");
-    localChatBot->SetChatLogicHandle(this);
+    ChatBot localChatBot("../images/chatbot.png");
+    localChatBot.SetChatLogicHandle(this);
 
     // Task 5 : add chatbot to graph root node
-    localChatBot->SetRootNode(rootNode);
-    rootNode->MoveChatbotHere(std::move(localChatBot));
+    localChatBot.SetRootNode(rootNode);
+    rootNode->MoveChatbotHere(move(localChatBot));
 
     // add pointer to chatlogic so that chatbot answers can be passed on to the GUI
     // _chatBot->SetChatLogicHandle(this);

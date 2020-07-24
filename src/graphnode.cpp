@@ -13,7 +13,7 @@ GraphNode::~GraphNode()
     //// STUDENT CODE
     ////
 
-    delete _chatBot; 
+  //delete _chatBot; // original, Task 5, _chatBot is not a pointer
 
     ////
     //// EOF STUDENT CODE
@@ -40,16 +40,19 @@ void GraphNode::AddEdgeToChildNode(unique_ptr<GraphEdge> edge) // my code : Task
 
 //// STUDENT CODE
 ////
-void GraphNode::MoveChatbotHere(ChatBot *chatbot)
+void GraphNode::MoveChatbotHere(ChatBot chatbot)
 {
-    _chatBot = chatbot;
-    _chatBot->SetCurrentNode(this);
+    // _chatBot = chatbot;             // original
+    // _chatBot->SetCurrentNode(this); // original
+    _chatBot = move(chatbot);  // my code , Task-5
+    _chatBot.SetCurrentNode(this);  // my code , Task-5    
 }
 
 void GraphNode::MoveChatbotToNewNode(GraphNode *newNode)
 {
-    newNode->MoveChatbotHere(_chatBot);
-    _chatBot = nullptr; // invalidate pointer at source
+  //newNode->MoveChatbotHere(_chatBot); // original
+    newNode->MoveChatbotHere(move(_chatBot)); // my code , Task 5
+    // _chatBot = nullptr; // invalidate pointer at source // original, Task 5
 }
 ////
 //// EOF STUDENT CODE

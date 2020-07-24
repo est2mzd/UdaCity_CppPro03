@@ -8,6 +8,9 @@
 #include "graphedge.h"
 #include "chatbot.h"
 
+using std::cout;
+using std::endl;
+
 // constructor WITHOUT memory allocation
 ChatBot::ChatBot()
 {
