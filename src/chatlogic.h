@@ -33,7 +33,7 @@ private:
 
     // data handles (not owned)
     GraphNode *_currentNode;
-    ChatBot *_chatBot; // original  : Task 5 , ChatLogic does not have ChatBot instances
+    ChatBot *_chatBot;
     ChatBotPanelDialog *_panelDialog;
 
     // proprietary type definitions
